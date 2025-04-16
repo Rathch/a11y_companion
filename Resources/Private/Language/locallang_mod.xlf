@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2025-04-16T12:00:00Z">
+        <body>
+            <trans-unit id="module.title">
+                <source>a11y Companion</source>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tablabel">
+                <source>a11y Companion</source>
+            </trans-unit>
+            <trans-unit id="mlang_tabs_tab">
+                <source>a11y Companion</source>
+            </trans-unit>
+            <trans-unit id="header.altText">
+                <source>alt tags Overview</source>
+            </trans-unit>
+            <trans-unit id="table.previewImage">
+                <source>Preview Image</source>
+            </trans-unit>
+            <trans-unit id="table.fileName">
+                <source>Filename</source>
+            </trans-unit>
+            <trans-unit id="table.path">
+                <source>Path</source>
+            </trans-unit>
+            <trans-unit id="table.altTextAvailable">
+                <source>Alt tag present</source>
+            </trans-unit>
+            <trans-unit id="table.decorative">
+                <source>Decorativ</source>
+            </trans-unit>
+            <trans-unit id="table.actions">
+                <source>Action</source>
+            </trans-unit>
+            <trans-unit id="badge.yes">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="badge.no">
+                <source>No</source>
+            </trans-unit>
+            
+        </body>
+    </file>
+</xliff>

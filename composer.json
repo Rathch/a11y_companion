@@ -1,0 +1,25 @@
+{
+    "name": "cru/a11y-companion",
+    "description": "collection of helpful tools to provide an useful experience for all",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Christian Rath-Ulrich",
+            "email": "christian@rath-ulrich.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cru\\A11yCompanion\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "a11y_companion"
+        }
+    }
+}

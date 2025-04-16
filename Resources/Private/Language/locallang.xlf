@@ -1,0 +1,12 @@
+
+'header.altText' => 'Alt-Text Übersicht',
+'table.previewImage' => 'Vorschaubild',
+'table.fileName' => 'Dateiname',
+'table.path' => 'Pfad',
+'table.altTextAvailable' => 'Alt-Text vorhanden',
+'table.decorative' => 'Dekorativ',
+'table.actions' => 'Aktionen',
+'badge.yes' => 'Ja',
+'badge.no' => 'Nein',
+'pagination.previousPage' => 'Vorherige Seite',
+'pagination.nextPage' => 'Nächste Seite',

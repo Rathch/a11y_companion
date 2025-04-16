@@ -1,0 +1,120 @@
+<html data-namespace-typo3-fluid="true" xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:layout name="Module" />
+<f:section name="Content">
+    <h1>
+        <f:translate key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:header.altText" />
+    </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.previewImage" />
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.fileName" />
+                </th>
+                <th>
+                    <f:translate key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.path" />
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.altTextAvailable" />
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.decorative" />
+                </th>
+                <th>
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:table.actions" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{images}" as="image">
+                <tr>
+                    <td>
+                        <f:image src="fileadmin{image.identifier}" alt="{image.alternative}" width="100px"
+                            height="100px" />
+                    </td>
+                    <td>{image.name}</td>
+                    <td>{image.identifier}</td>
+                    <td>
+                        <f:if condition="{image.alternative}">
+                            <f:then>
+                                <span class="badge badge-success">
+                                    <f:translate
+                                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:badge.yes" />
+                                </span>
+                            </f:then>
+                            <f:else>
+                                <span class="badge badge-danger">
+                                    <f:translate
+                                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:badge.no" />
+                                </span>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{image.is_decorative}">
+                            <f:then>
+                                <span class="badge badge-success">
+                                    <f:translate
+                                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:badge.yes" />
+                                </span>
+                            </f:then>
+                            <f:else>
+                                <span class="badge badge-danger">
+                                    <f:translate
+                                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:badge.no" />
+                                </span>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <be:link.editRecord class="btn btn-default btn-borderless" table="sys_file_metadata"
+                            uid="{image.uid}">
+                            <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
+                                data-identifier="actions-page-open" aria-hidden="true">
+                                <span class="icon-markup">
+                                    <svg class="icon-color">
+                                        <use
+                                            xlink:href="/_assets/1ee1d3e909b58d32e30dcea666dd3224/Icons/T3Icons/sprites/actions.svg#actions-file-edit">
+                                        </use>
+                                    </svg>
+                                </span>
+                            </span>
+                        </be:link.editRecord>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <f:if condition="{currentPage} > 1">
+            <a href="?id={data.uid}&currentPage={currentPage - 1}">
+                <f:translate key="pagination.previousPage" />
+            </a>
+        </f:if>
+
+        <f:for each="{0: totalPages}" as="page" iteration="iterator">
+            <f:if condition="{iterator.index} + 1 == {currentPage}">
+                <strong>{iterator.index + 1}</strong>
+            </f:if>
+            <f:else>
+                <a href="?id={data.uid}&currentPage={iterator.index + 1}">{iterator.index + 1}</a>
+            </f:else>
+        </f:for>
+
+        <f:if condition="{currentPage} < {totalPages}">
+            <a href="?id={data.uid}&currentPage={currentPage + 1}">
+                <f:translate key="pagination.nextPage" />
+            </a>
+        </f:if>
+    </div>
+</f:section>
