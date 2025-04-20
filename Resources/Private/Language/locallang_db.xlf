@@ -5,13 +5,6 @@
             <trans-unit id="sys_file_metadata.is_decorative">
                 <source>is decorative</source>
             </trans-unit>
-            
-            <trans-unit id="pagination.previousPage">
-                <source>Vorherige Seite</source>
-            </trans-unit>
-            <trans-unit id="pagination.nextPage">
-                <source>Nächste Seite</source>
-            </trans-unit>
         </body>
     </file>
 </xliff>
