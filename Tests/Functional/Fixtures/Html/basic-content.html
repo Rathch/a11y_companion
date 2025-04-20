@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A11y Test Content</title>
+</head>
+
+<body>
+    <!-- Test Case 1: Missing alt text -->
+    <img src="test-image.jpg">
+
+    <!-- Test Case 2: Proper alt text -->
+    <img src="test-image.jpg" alt="A descriptive alt text">
+
+    <!-- Test Case 3: Empty button -->
+    <button></button>
+
+    <!-- Test Case 4: Proper button -->
+    <button aria-label="Submit form">Submit</button>
+
+    <!-- Test Case 5: Improper heading structure -->
+    <h1>Main Title</h1>
+    <h3>Skipped H2</h3>
+
+    <!-- Test Case 6: Proper heading structure -->
+    <div class="good-structure">
+        <h1>Main Title</h1>
+        <h2>Subtitle</h2>
+        <h3>Section Title</h3>
+    </div>
+</body>
+
+</html>

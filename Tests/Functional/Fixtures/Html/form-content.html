@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A11y Form Tests</title>
+</head>
+
+<body>
+    <!-- Test Case 1: Form without labels -->
+    <form class="invalid-form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Test Case 2: Properly labeled form -->
+    <form class="valid-form">
+        <div>
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="username">
+        </div>
+        <div>
+            <label for="pass">Password:</label>
+            <input type="password" id="pass" name="password">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Test Case 3: ARIA landmarks -->
+    <div class="landmarks">
+        <header role="banner">
+            <nav role="navigation">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main role="main">
+            <h1>Main Content</h1>
+        </main>
+        <aside role="complementary">
+            <h2>Related Info</h2>
+        </aside>
+    </div>
+</body>
+
+</html>
