@@ -12,7 +12,8 @@
     "require": {
         "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
         "typo3/cms-core": "^11.5 || ^12.4 || ^13.4",
-        "typo3/cms-extbase": "^11.5 || ^12.4 || ^13.4"
+        "typo3/cms-extbase": "^11.5 || ^12.4 || ^13.4",
+        "zeroseven/z7-semantilizer": "^4.1"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "2.44.0",
