@@ -1,0 +1,91 @@
+testpage:
+  table: pages
+  pid: 0
+  action: replace
+  count: 1
+  fields:
+    hidden:
+      provider: FixedValue
+      value: 0
+    title:
+      provider: FixedValue
+      value: RandomData Testseite
+    doktype:
+      provider: FixedValue
+      value: 1
+    is_siteroot:
+      provider: FixedValue
+      value: 0
+
+ce_without_alt:
+  table: tt_content
+  pid: 1
+  action: replace
+  count: 1
+  fields:
+    CType:
+      provider: FixedValue
+      value: textmedia
+    header:
+      provider: Words
+      minimum: 2
+      maximum: 5
+    image:
+      provider: File
+      minimum: 1
+      maximum: 1
+      source: fileadmin/
+      referenceFields: {}
+    sys_language_uid:
+      provider: FixedValue
+      value: 0
+
+ce_alt_in_metadata:
+  table: tt_content
+  pid: 1
+  action: replace
+  count: 1
+  fields:
+    CType:
+      provider: FixedValue
+      value: textmedia
+    header:
+      provider: Words
+      minimum: 2
+      maximum: 5
+    image:
+      provider: File
+      minimum: 1
+      maximum: 1
+      source: fileadmin/
+      referenceFields: {} # Alttext wird aus sys_file_metadata gelesen
+    sys_language_uid:
+      provider: FixedValue
+      value: 0
+
+ce_alt_in_reference:
+  table: tt_content
+  pid: 1
+  action: replace
+  count: 1
+  fields:
+    CType:
+      provider: FixedValue
+      value: textmedia
+    header:
+      provider: Words
+      minimum: 2
+      maximum: 5
+    image:
+      provider: File
+      minimum: 1
+      maximum: 1
+      source: fileadmin/
+      referenceFields:
+        alternative:
+          provider: Sentences
+          minimum: 1
+          maximum: 2
+    sys_language_uid:
+      provider: FixedValue
+      value: 0

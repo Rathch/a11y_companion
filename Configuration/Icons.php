@@ -17,11 +17,10 @@
   * LICENSE file that was distributed with this source code.
   */
 
-use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+
 
 return [
-    'tx_a11y_companion-backend-module' => [
-        'provider' => SvgIconProvider::class,
-        'source' => 'EXT:a11y_companion/Resources/Public/Icons/Extension.svg',
+    'module-a11y-companion' => [
+        'source' => 'EXT:a11y_companion/Resources/Public/Icons/Extension.png',
     ],
 ];
