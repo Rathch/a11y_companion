@@ -18,14 +18,19 @@
   */
 
 return [
-    'tx_a11y_companion_list' => [
-        'path' => '/module/system/a11y_companion/list',
-        'target' => 'Cru\\A11yCompanion\\Backend\\Controller\\CompanionModuleController::listImagesWithoutAltTextAction',
-        'action' => 'listImagesWithoutAltText',
-    ],
     'tx_a11y_companion_index' => [
         'path' => '/module/system/a11y_companion/index',
         'target' => 'Cru\\A11yCompanion\\Backend\\Controller\\CompanionModuleController::indexAction',
         'action' => 'index',
+    ],
+    'tx_a11y_companion_list_alt' => [
+        'path' => '/module/system/a11y_companion/list_alt',
+        'target' => 'Cru\\A11yCompanion\\Backend\\Controller\\CompanionModuleController::listImagesWithoutAltTextAction',
+        'action' => 'listImagesWithoutAltText',
+    ],
+    'tx_a11y_companion_list_link' => [
+        'path' => '/module/system/a11y_companion/lis_link',
+        'target' => 'Cru\\A11yCompanion\\Backend\\Controller\\CompanionModuleController::listLinksWithoutPurpose',
+        'action' => 'listLinksWithoutPurpose',
     ],
 ];

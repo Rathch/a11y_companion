@@ -13,6 +13,7 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Cru\A11yCompanion\Service\ProvideParsedLinkListService;
 
 class CompanionModuleController extends ActionController
 {
@@ -20,8 +21,9 @@ class CompanionModuleController extends ActionController
 
     public function __construct(
         ImageRepository $imageRepository,
-        private readonly ModuleTemplateFactory $moduleTemplateFactory
-        )
+        private readonly ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly ProvideParsedLinkListService $provideParsedLinkListService
+    )
     {
         $this->imageRepository = $imageRepository;
     }
@@ -47,11 +49,17 @@ class CompanionModuleController extends ActionController
                 'route' => 'tx_a11y_companion_index',
                 'label' => 'A11y Companion',
             ],
-            'list' => [
+            'list_alt' => [
                 'controller' => 'Module',
                 'action' => 'listImagesWithoutAltText',
-                'route' => 'tx_a11y_companion_list',
+                'route' => 'tx_a11y_companion_list_alt',
                 'label' => 'List Missing Alt Text',
+            ],
+            'list_link' => [
+                'controller' => 'Module',
+                'action' => 'listLinksWithoutPurpose',
+                'route' => 'tx_a11y_companion_list_link',
+                'label' => 'List Links without Purpose',
             ],
         ];
 
@@ -104,4 +112,28 @@ class CompanionModuleController extends ActionController
 
         return $moduleTemplate->renderResponse('AltText/List');
     }
+
+    public function listLinksWithoutPurpose($request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
+    {
+        $offset = ($currentPage - 1) * $itemsPerPage;
+        $images = $this->imageRepository->findImagesWithoutAltText($offset, $itemsPerPage);
+        $totalImages = $this->imageRepository->countImagesWithoutAltText();
+        $totalPages = (int)ceil($totalImages / $itemsPerPage);
+
+        $moduleTemplate = $this->moduleTemplateFactory->create($request);
+
+        $this->setUpMenu($request, $moduleTemplate);
+
+        $moduleTemplate->setTitle('Missing Link Purpose');
+
+        $moduleTemplate->assignMultiple([
+            'links' => $this->provideParsedLinkListService->getConfiguration(),
+            'currentPage' => $currentPage,
+            'totalPages' => $totalPages,
+            'itemsPerPage' => $itemsPerPage,
+        ]);
+
+        return $moduleTemplate->renderResponse('Links/List');
+    }
+    
 }

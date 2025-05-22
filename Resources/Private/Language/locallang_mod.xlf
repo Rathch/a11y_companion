@@ -41,7 +41,52 @@
             <trans-unit id="badge.no">
                 <source>No</source>
             </trans-unit>
-            
+            <trans-unit id="page" xml:space="preserve">
+				<source>Page</source>
+			</trans-unit>
+			<trans-unit id="slug" xml:space="preserve">
+				<source>Slug</source>
+			</trans-unit>
+			<trans-unit id="visibility" xml:space="preserve">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="yes" xml:space="preserve">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="no" xml:space="preserve">
+				<source>No</source>
+			</trans-unit>
+
+			<trans-unit id="uid" xml:space="preserve">
+				<source>UID</source>
+			</trans-unit>
+			<trans-unit id="pid" xml:space="preserve">
+				<source>PID</source>
+			</trans-unit>
+			<trans-unit id="deleted" xml:space="preserve">
+				<source>Deleted</source>
+			</trans-unit>
+			<trans-unit id="url" xml:space="preserve">
+				<source>URL</source>
+			</trans-unit>
+			<trans-unit id="target" xml:space="preserve">
+				<source>Target</source>
+			</trans-unit>
+			<trans-unit id="actions" xml:space="preserve">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="visible" xml:space="preserve">
+				<source>Visible</source>
+			</trans-unit>
+			<trans-unit id="hidden" xml:space="preserve">
+				<source>Hidden</source>
+			</trans-unit>
+			<trans-unit id="title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+            <trans-unit id="contend" xml:space="preserve">
+				<source>Contend</source>
+			</trans-unit>
         </body>
     </file>
 </xliff>
