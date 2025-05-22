@@ -14,6 +14,9 @@
             <trans-unit id="header.altText">
                 <source>alt tags Overview</source>
             </trans-unit>
+            <trans-unit id="description.altText">
+                <source>here are all pictures listed that have no alt tag. pictures can be marked as decorative. see also:</source>
+            </trans-unit>
             <trans-unit id="table.previewImage">
                 <source>Preview Image</source>
             </trans-unit>

@@ -13,40 +13,40 @@ class ImageRepository
     {
 
 
-$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_metadata');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_metadata');
 
-// Subquery mit selectLiteral
-$subQuery = $queryBuilder->getConnection()->createQueryBuilder()
-    ->selectLiteral('1')
-    ->from('sys_file_reference')
-    ->where(
-        'sys_file_reference.uid_local = sys_file_metadata.file',
-        'sys_file_reference.alternative IS NOT NULL',
-        'sys_file_reference.alternative != \'\''
-    );
 
-$result = $queryBuilder
-    ->select('sys_file_metadata.*', 'sys_file.*')
-    ->from('sys_file_metadata')
-    ->innerJoin(
-        'sys_file_metadata',
-        'sys_file',
-        'sys_file',
-        $queryBuilder->expr()->eq('sys_file_metadata.file', $queryBuilder->quoteIdentifier('sys_file.uid'))
-    )
-    ->where(
-        $queryBuilder->expr()->orX(
-            $queryBuilder->expr()->eq('sys_file_metadata.alternative', $queryBuilder->createNamedParameter('')),
-            $queryBuilder->expr()->isNull('sys_file_metadata.alternative')
+        $subQuery = $queryBuilder->getConnection()->createQueryBuilder()
+        ->selectLiteral('1')
+        ->from('sys_file_reference')
+        ->where(
+            'sys_file_reference.uid_local = sys_file_metadata.file',
+            'sys_file_reference.alternative IS NOT NULL',
+            'sys_file_reference.alternative != \'\''
+        );
+
+        $result = $queryBuilder
+        ->select('sys_file_metadata.*', 'sys_file.*')
+        ->from('sys_file_metadata')
+        ->innerJoin(
+            'sys_file_metadata',
+            'sys_file',
+            'sys_file',
+            $queryBuilder->expr()->eq('sys_file_metadata.file', $queryBuilder->quoteIdentifier('sys_file.uid'))
         )
-    )
-    ->andWhere(
-        'NOT EXISTS (' . $subQuery->getSQL() . ')'
-    )
-    ->setFirstResult($offset)
-    ->setMaxResults($limit)
-    ->executeQuery()
-    ->fetchAllAssociative();
+        ->where(
+            $queryBuilder->expr()->or(
+                $queryBuilder->expr()->eq('sys_file_metadata.alternative', $queryBuilder->createNamedParameter('')),
+                $queryBuilder->expr()->isNull('sys_file_metadata.alternative')
+            )
+        )
+        ->andWhere(
+            'NOT EXISTS (' . $subQuery->getSQL() . ')'
+        )
+        ->setFirstResult($offset)
+        ->setMaxResults($limit)
+        ->executeQuery()
+        ->fetchAllAssociative();
 
         return $result;
     }
@@ -58,7 +58,7 @@ $result = $queryBuilder
             ->count('*')
             ->from('sys_file_metadata')
             ->where(
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq('alternative', $queryBuilder->createNamedParameter('')),
                     $queryBuilder->expr()->isNull('alternative')
                 )

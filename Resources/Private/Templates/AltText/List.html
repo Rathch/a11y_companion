@@ -6,6 +6,12 @@
     <h1>
         <f:translate key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:header.altText" />
     </h1>
+
+    <p>
+        <f:translate key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:description.altText" />
+        <a href="https://www.w3.org/TR/WCAG20-TECHS/H37.html">https://www.w3.org/TR/WCAG20-TECHS/H37.html</a>
+    </p>
+
     <table class="table">
         <thead>
             <tr>
@@ -38,8 +44,7 @@
             <f:for each="{images}" as="image">
                 <tr>
                     <td>
-                        <f:image src="fileadmin{image.identifier}" alt="{image.alternative}" width="100px"
-                            height="100px" />
+                        <f:image src="fileadmin{image.identifier}" alt="{image.alternative}" height="100px" />
                     </td>
                     <td>{image.name}</td>
                     <td>{image.identifier}</td>
