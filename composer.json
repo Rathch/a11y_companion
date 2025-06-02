@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "~8.2.0 || ~8.3.0",
+        "php": "~8.3.0 || ~8.4.0",
         "typo3/cms-core": "^13.4",
         "typo3/cms-extbase": "^13.4",
         "zeroseven/z7-semantilizer": "^4.1"
