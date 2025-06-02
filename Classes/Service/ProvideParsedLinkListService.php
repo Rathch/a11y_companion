@@ -27,13 +27,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final readonly class ProvideParsedLinkListService
 {
-    public function getConfiguration(bool $useCache = true): array
+    public function getConfiguration(): array
     {
         $cacheFile = Environment::getVarPath() . '/cache/data/LinksWithoutPurpose.json';
 
         if (
-            $useCache === true
-            && file_exists($cacheFile)
+             file_exists($cacheFile)
             && filemtime($cacheFile) > time() - 600
         ) {
             $externalLinks = json_decode(file_get_contents($cacheFile), true);

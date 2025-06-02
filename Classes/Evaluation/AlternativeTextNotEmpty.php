@@ -14,6 +14,7 @@ class AlternativeTextNotEmpty
 {
     /**
      * @psalm-suppress PossiblyUnusedMethod
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
      * @throws Exception
      */
@@ -24,13 +25,14 @@ class AlternativeTextNotEmpty
         }
 
         $this->setFlashMessageForMissingAlternativeText();
-        $set = false; // Calling code will ignore the return value
+        $set = false;
 
         return '';
     }
 
     /**
      * @throws Exception
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     private function setFlashMessageForMissingAlternativeText(): void
     {

@@ -114,19 +114,23 @@ class CompanionModuleController extends ActionController
     public function listLinksWithoutPurpose($request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
     {
         $result = $this->provideParsedLinkListService->getConfiguration();
-        $offset = ($currentPage - 1) * $itemsPerPage;
-
-        $totalLinks =$result['count'] ?? 0;
+        $allLinks = [];
+        foreach ($result['links'] as $linksPerRecord) {
+            foreach ($linksPerRecord as $link) {
+                $allLinks[] = $link;
+            }
+        }
+        $totalLinks = $result['count'] ?? 0;
         $totalPages = (int)ceil($totalLinks / $itemsPerPage);
+        $offset = ($currentPage - 1) * $itemsPerPage;
+        $linksForPage = array_slice($allLinks, $offset, $itemsPerPage);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
-
         $this->setUpMenu($request, $moduleTemplate);
-
         $moduleTemplate->setTitle('Missing Link Purpose');
 
         $moduleTemplate->assignMultiple([
-            'links' => $result['links'],
+            'links' => $linksForPage,
             'currentPage' => $currentPage,
             'totalPages' => $totalPages,
             'itemsPerPage' => $itemsPerPage,

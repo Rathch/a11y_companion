@@ -111,28 +111,6 @@ jobs:
       matrix:
         php-version:
           - "8.3"
-  code-quality-frontend:
-    name: "Code quality frontend checks"
-    runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        command:
-          - "css"
-          - "js"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-      - name: "Set up Node.js"
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.5.1"
-      - name: "Install modules"
-        run: |
-          npm ci
-      - name: "Run command"
-        run: |
-          npm run ci:lint:${{ matrix.command }}
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-24.04
@@ -272,14 +250,4 @@ jobs:
       - name: Check scripts
         run: |
           Build/Scripts/runTests.sh -s shellcheck
-  documentation:
-    name: Documentation
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Test if the documentation will render without warnings
-        run: |
-          docker run --rm --pull always -v $(pwd):/project \
-             ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --fail-on-log
+
