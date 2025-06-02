@@ -86,7 +86,7 @@ class RequireAlternativeText implements FormDataProviderInterface
     private function setRequiredFieldEvaluation(array $configuration, array $result): array
     {
         $isDecorative = $result['databaseRow']['is_decorative'] ?? false;
-    
+
         if ($isDecorative) {
             $evalCodes = GeneralUtility::trimExplode(',', $configuration['eval'] ?? '', true);
             $evalCodes = array_filter($evalCodes, static function ($value): bool {
@@ -103,10 +103,9 @@ class RequireAlternativeText implements FormDataProviderInterface
             $configuration['eval'] = implode(',', $evalCodes);
             $configuration['required'] = true;
         }
-    
+
         return $configuration;
     }
-    
 
     /**
      * @param array<array-key, mixed> $configuration

@@ -10,7 +10,6 @@ if (!empty($GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['conf
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
     'sys_file_reference',
-
     [
         'is_decorative' => [
             'exclude' => 1,
@@ -20,8 +19,8 @@ if (!empty($GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['conf
                 'default' => 0,
                 'type' => 'check',
                 'items' => [
-                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1]
-                ]
+                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1],
+                ],
             ],
         ],
     ]

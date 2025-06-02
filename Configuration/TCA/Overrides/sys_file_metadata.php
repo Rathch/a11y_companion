@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
     'sys_file_metadata',
@@ -11,20 +11,20 @@ declare(strict_types=1);
             'config' => [
                 'type' => 'check',
                 'items' => [
-                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1]
-                ]
-            ],  
+                    ['LLL:EXT:lang/locallang_core.xlf:labels.enabled', 1],
+                ],
+            ],
         ],
     ]
- );
+);
 
- \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'sys_file_metadata',
     'is_decorative'
- );
- \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
     'sys_file_metadata',
     'imageoverlayPalette',
     'is_decorative',
     'before:alternative'
- );
+);

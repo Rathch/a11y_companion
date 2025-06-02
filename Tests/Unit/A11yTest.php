@@ -17,7 +17,7 @@ final class A11yTest extends UnitTestCase
     }
 
     #[Test]
-    public function testExample(): void 
+    public function testExample(): void
     {
         self::assertTrue(true);
     }

@@ -17,8 +17,6 @@
   * LICENSE file that was distributed with this source code.
   */
 
-
-
 return [
     'module-a11y-companion' => [
         'source' => 'EXT:a11y_companion/Resources/Public/Icons/Extension.png',

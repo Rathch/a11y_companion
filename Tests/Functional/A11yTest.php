@@ -7,7 +7,6 @@ namespace Cru\A11yCompanion\Tests\Functional;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
-use DOMDocument;
 
 #[CoversClass(A11yTest::class)]
 final class A11yTest extends FunctionalTestCase
@@ -23,9 +22,9 @@ final class A11yTest extends FunctionalTestCase
         $this->formFixturePath = __DIR__ . '/Fixtures/Html/form-content.html';
     }
 
-    protected function loadHtmlFixture(string $path): DOMDocument
+    protected function loadHtmlFixture(string $path): \DOMDocument
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadHTMLFile($path);
         return $dom;
     }
@@ -35,14 +34,14 @@ final class A11yTest extends FunctionalTestCase
     {
         $dom = $this->loadHtmlFixture($this->htmlFixturePath);
         $images = $dom->getElementsByTagName('img');
-        
+
         $imagesWithoutAlt = 0;
         foreach ($images as $img) {
             if (!$img->hasAttribute('alt')) {
                 $imagesWithoutAlt++;
             }
         }
-        
+
         self::assertEquals(1, $imagesWithoutAlt, 'Expected exactly one image without alt text in test fixture');
     }
 
@@ -51,14 +50,14 @@ final class A11yTest extends FunctionalTestCase
     {
         $dom = $this->loadHtmlFixture($this->htmlFixturePath);
         $buttons = $dom->getElementsByTagName('button');
-        
+
         $emptyButtons = 0;
         foreach ($buttons as $button) {
             if (empty($button->textContent) && !$button->hasAttribute('aria-label')) {
                 $emptyButtons++;
             }
         }
-        
+
         self::assertEquals(1, $emptyButtons, 'Expected exactly one empty button in test fixture');
     }
 
@@ -67,19 +66,19 @@ final class A11yTest extends FunctionalTestCase
     {
         $dom = $this->loadHtmlFixture($this->htmlFixturePath);
         $headings = $dom->getElementsByTagName('h3');
-        
+
         $improperHeadings = 0;
         foreach ($headings as $h3) {
             $prevSibling = $h3->previousSibling;
             while ($prevSibling && !($prevSibling instanceof \DOMElement && preg_match('/^h[1-6]$/', $prevSibling->tagName))) {
                 $prevSibling = $prevSibling->previousSibling;
             }
-            
+
             if (!$prevSibling || $prevSibling->tagName !== 'h2') {
                 $improperHeadings++;
             }
         }
-        
+
         self::assertEquals(1, $improperHeadings, 'Expected exactly one improper heading structure in test fixture');
     }
 
@@ -88,14 +87,14 @@ final class A11yTest extends FunctionalTestCase
     {
         $dom = $this->loadHtmlFixture($this->formFixturePath);
         $inputs = $dom->getElementsByTagName('input');
-        
+
         $inputsWithoutLabels = 0;
         foreach ($inputs as $input) {
             if ($input->getAttribute('type') !== 'submit' && !$this->hasAssociatedLabel($input)) {
                 $inputsWithoutLabels++;
             }
         }
-        
+
         self::assertEquals(2, $inputsWithoutLabels, 'Expected exactly two inputs without labels in invalid form');
     }
 
@@ -107,9 +106,9 @@ final class A11yTest extends FunctionalTestCase
             'banner' => false,
             'navigation' => false,
             'main' => false,
-            'complementary' => false
+            'complementary' => false,
         ];
-        
+
         $elements = $dom->getElementsByTagName('*');
         foreach ($elements as $element) {
             $role = $element->getAttribute('role');
@@ -117,7 +116,7 @@ final class A11yTest extends FunctionalTestCase
                 $landmarks[$role] = true;
             }
         }
-        
+
         self::assertTrue($landmarks['banner'], 'Banner landmark not found');
         self::assertTrue($landmarks['navigation'], 'Navigation landmark not found');
         self::assertTrue($landmarks['main'], 'Main landmark not found');
@@ -130,14 +129,14 @@ final class A11yTest extends FunctionalTestCase
         if (empty($id)) {
             return false;
         }
-        
+
         $labels = $input->ownerDocument->getElementsByTagName('label');
         foreach ($labels as $label) {
             if ($label->getAttribute('for') === $id) {
                 return true;
             }
         }
-        
+
         return false;
     }
 }

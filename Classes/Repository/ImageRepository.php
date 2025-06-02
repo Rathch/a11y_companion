@@ -12,9 +12,7 @@ class ImageRepository
     public function findImagesWithoutAltText(int $offset = 0, int $limit = 10): array
     {
 
-
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_metadata');
-
 
         $subQuery = $queryBuilder->getConnection()->createQueryBuilder()
         ->selectLiteral('1')

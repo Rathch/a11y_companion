@@ -1,7 +1,5 @@
 <?php
 
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-
 return [
     'a11y_companion' => [
         'parent' => 'system',

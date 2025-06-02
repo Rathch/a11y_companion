@@ -21,10 +21,9 @@ declare(strict_types=1);
 
 namespace Cru\A11yCompanion\Service;
 
-use DOMDocument;
 use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final readonly class ProvideParsedLinkListService
 {
@@ -54,7 +53,7 @@ final readonly class ProvideParsedLinkListService
             ->executeQuery()
             ->fetchAssociative();
 
-            $dom = new DOMDocument();
+            $dom = new \DOMDocument();
             @$dom->loadHTML($record['bodytext'], LIBXML_NOERROR);
             $anchors = $dom->getElementsByTagName('a');
             $index = 0;
@@ -64,13 +63,13 @@ final readonly class ProvideParsedLinkListService
                 foreach ($blacklistWords as $blackWord) {
                     if (stripos($linkText, $blackWord) !== false) {
                         $externalLinks[$record['uid']][$index] = [
-                        'href' => $href,
-                        'content' =>$linkText,
-                        'uid' => $record['uid'],
-                        'pid' => $record['pid'],
-                        'title' => $page['title'],
-                    ];
-                    $index++;
+                            'href' => $href,
+                            'content' => $linkText,
+                            'uid' => $record['uid'],
+                            'pid' => $record['pid'],
+                            'title' => $page['title'],
+                        ];
+                        $index++;
                     }
                 }
             }
@@ -81,7 +80,7 @@ final readonly class ProvideParsedLinkListService
         return $externalLinks;
     }
 
-    private function fetchRecordsWithLinks()
+    private function fetchRecordsWithLinks(): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tt_content');
         $records = $queryBuilder
@@ -93,7 +92,7 @@ final readonly class ProvideParsedLinkListService
             ->executeQuery()
             ->fetchAllAssociative();
 
-            return $records;
+        return $records;
     }
 
     /**

@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Cru\A11yCompanion\Backend\Controller;
 
 use Cru\A11yCompanion\Repository\ImageRepository;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Cru\A11yCompanion\Service\ProvideParsedLinkListService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Backend\Attribute\AsController;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Cru\A11yCompanion\Service\ProvideParsedLinkListService;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CompanionModuleController extends ActionController
 {
@@ -23,8 +22,7 @@ class CompanionModuleController extends ActionController
         ImageRepository $imageRepository,
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly ProvideParsedLinkListService $provideParsedLinkListService
-    )
-    {
+    ) {
         $this->imageRepository = $imageRepository;
     }
 
@@ -41,7 +39,7 @@ class CompanionModuleController extends ActionController
     {
         $menu = $moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
         $menu->setIdentifier('a11y_companion_menu');
-        
+
         $menuItems = [
             'index' => [
                 'controller' => 'Module',
@@ -135,5 +133,4 @@ class CompanionModuleController extends ActionController
 
         return $moduleTemplate->renderResponse('Links/List');
     }
-    
 }
