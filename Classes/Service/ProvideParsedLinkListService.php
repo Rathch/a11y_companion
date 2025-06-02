@@ -30,29 +30,60 @@ final readonly class ProvideParsedLinkListService
     public function getConfiguration(bool $useCache = true): array
     {
         $cacheFile = Environment::getVarPath() . '/cache/data/LinksWithoutPurpose.json';
-        $externalLinks = [];
 
         if (
             $useCache === true
             && file_exists($cacheFile)
             && filemtime($cacheFile) > time() - 600
         ) {
-            return json_decode(file_get_contents($cacheFile), true);
+            $externalLinks = json_decode(file_get_contents($cacheFile), true);
+            $count = $this->countLinks($externalLinks);
+            return [
+                'links' => $externalLinks,
+                'count' => $count,
+            ];
         }
 
         $records = $this->fetchRecordsWithLinks();
         $blacklistWords = $this->getBlacklistWords();
-        foreach ($records as $record) {
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
-            $page = $queryBuilder
-            ->select('uid', 'title')
-            ->from('pages')
-            ->where(
-                $queryBuilder->expr()->eq('uid', $record['pid'])
-            )
-            ->executeQuery()
-            ->fetchAssociative();
+        $externalLinks = $this->parseAndFilterLinks($records, $blacklistWords);
 
+        GeneralUtility::writeFileToTypo3tempDir($cacheFile, json_encode($externalLinks));
+
+        $count = $this->countLinks($externalLinks);
+        return [
+            'links' => $externalLinks,
+            'count' => $count,
+        ];
+    }
+
+    /**
+     * Zählt die Gesamtanzahl der Links im Ergebnisarray
+     *
+     * @param array $externalLinks
+     * @return int
+     */
+    private function countLinks(array $externalLinks): int
+    {
+        $count = 0;
+        foreach ($externalLinks as $linksPerRecord) {
+            $count += is_array($linksPerRecord) ? count($linksPerRecord) : 0;
+        }
+        return $count;
+    }
+
+    /**
+     * Parsen und Filtern der Links aus den Records
+     *
+     * @param array $records
+     * @param array $blacklistWords
+     * @return array
+     */
+    private function parseAndFilterLinks(array $records, array $blacklistWords): array
+    {
+        $externalLinks = [];
+        foreach ($records as $record) {
+            $page = $this->fetchPage($record['pid']);
             $dom = new \DOMDocument();
             @$dom->loadHTML($record['bodytext'], LIBXML_NOERROR);
             $anchors = $dom->getElementsByTagName('a');
@@ -70,14 +101,31 @@ final readonly class ProvideParsedLinkListService
                             'title' => $page['title'],
                         ];
                         $index++;
+                        break; // Nur einmal pro Link eintragen
                     }
                 }
             }
         }
-
-        GeneralUtility::writeFileToTypo3tempDir($cacheFile, json_encode($externalLinks));
-
         return $externalLinks;
+    }
+
+    /**
+     * Holt die Seitendaten anhand der PID
+     *
+     * @param int $pid
+     * @return array
+     */
+    private function fetchPage(int $pid): array
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
+        return $queryBuilder
+            ->select('uid', 'title')
+            ->from('pages')
+            ->where(
+                $queryBuilder->expr()->eq('uid', $pid)
+            )
+            ->executeQuery()
+            ->fetchAssociative() ?: ['uid' => $pid, 'title' => ''];
     }
 
     private function fetchRecordsWithLinks(): array
