@@ -88,7 +88,7 @@ class CompanionModuleController extends ActionController
         return $moduleTemplate->renderResponse('Index');
     }
 
-    public function listImagesWithoutAltTextAction($request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
+    public function listImagesWithoutAltTextAction(\TYPO3\CMS\Core\Http\ServerRequest $request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
     {
         $offset = ($currentPage - 1) * $itemsPerPage;
         $images = $this->imageRepository->findImagesWithoutAltText($offset, $itemsPerPage);
@@ -111,7 +111,7 @@ class CompanionModuleController extends ActionController
         return $moduleTemplate->renderResponse('AltText/List');
     }
 
-    public function listLinksWithoutPurpose($request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
+    public function listLinksWithoutPurpose(\TYPO3\CMS\Core\Http\ServerRequest $request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
     {
         $result = $this->provideParsedLinkListService->getConfiguration();
         $allLinks = [];
@@ -124,7 +124,7 @@ class CompanionModuleController extends ActionController
         $totalPages = (int)ceil($totalLinks / $itemsPerPage);
         $offset = ($currentPage - 1) * $itemsPerPage;
         $linksForPage = array_slice($allLinks, $offset, $itemsPerPage);
-
+       
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
         $this->setUpMenu($request, $moduleTemplate);
         $moduleTemplate->setTitle('Missing Link Purpose');

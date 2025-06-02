@@ -1,31 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Out of 18 possible param types, only 17 \\- 94\\.4 %% actually have it\\. Add more param types to get over 99 %%$#"
-			count: 1
-			path: Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Attribute class PHPUnit\\\\Framework\\\\Attributes\\\\CoversClass does not exist\\.$#"
-			count: 1
-			path: Tests/Functional/A11yTest.php
-
-		-
-			message: "#^Attribute class PHPUnit\\\\Framework\\\\Attributes\\\\Test does not exist\\.$#"
-			count: 5
-			path: Tests/Functional/A11yTest.php
-
-		-
-			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			message: "#^Out of 44 possible param types, only 42 \\- 95\\.4 %% actually have it\\. Add more param types to get over 99 %%$#"
 			count: 2
-			path: Tests/Functional/A11yTest.php
-
-		-
-			message: "#^Attribute class PHPUnit\\\\Framework\\\\Attributes\\\\CoversClass does not exist\\.$#"
-			count: 1
-			path: Tests/Unit/A11yTest.php
-
-		-
-			message: "#^Attribute class PHPUnit\\\\Framework\\\\Attributes\\\\Test does not exist\\.$#"
-			count: 1
-			path: Tests/Unit/A11yTest.php
+			path: Classes/Backend/FormDataProvider/RequireAlternativeText.php

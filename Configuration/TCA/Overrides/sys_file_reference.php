@@ -2,7 +2,7 @@
 
 use Cru\A11yCompanion\Evaluation\AlternativeTextNotEmpty;
 
-if (!empty($GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['config']['eval'])) {
+if (isset($GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['config']['eval']) && $GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['config']['eval'] !== '') {
     $GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['config']['eval'] .= ',' . AlternativeTextNotEmpty::class;
 } else {
     $GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['config']['eval'] = AlternativeTextNotEmpty::class;

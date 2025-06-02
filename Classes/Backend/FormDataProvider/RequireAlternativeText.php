@@ -44,6 +44,11 @@ class RequireAlternativeText implements FormDataProviderInterface
             && isset($configuration['processedTca']['columns']['alternative']['config']);
     }
 
+    /**
+     * @param array<string, mixed> $configuration
+     *
+     * @return bool
+     */
     private function placeholderIsEmpty(mixed $configuration): bool
     {
         return !isset($configuration['placeholder']) || trim($configuration['placeholder']) === '';
@@ -69,7 +74,7 @@ class RequireAlternativeText implements FormDataProviderInterface
     }
 
     /**
-     * @param array<array-key, mixed> $configuration
+     * @param array<string, mixed> $configuration
      *
      * @return array<array-key, mixed>
      */
@@ -79,23 +84,24 @@ class RequireAlternativeText implements FormDataProviderInterface
     }
 
     /**
-     * @param array<array-key, mixed> $configuration
+     * @param array{eval?: string, required?: bool} $configuration
+     * @param array{databaseRow: array{is_decorative?: bool}, processedTca: array, [key: string]: mixed} $result
      *
-     * @return array<array-key, mixed>
+     * @return array{eval?: string, required?: bool}
      */
     private function setRequiredFieldEvaluation(array $configuration, array $result): array
     {
-        $isDecorative = $result['databaseRow']['is_decorative'] ?? false;
-
+        $isDecorative = (bool)($result['databaseRow']['is_decorative'] ?? false);
+        $evalCodes = GeneralUtility::trimExplode(',', $configuration['eval'] ?? '', true);
         if ($isDecorative) {
-            $evalCodes = GeneralUtility::trimExplode(',', $configuration['eval'] ?? '', true);
+            // If the image is decorative, we do not require alternative
             $evalCodes = array_filter($evalCodes, static function ($value): bool {
                 return $value !== 'required' && $value !== 'null';
             });
             $configuration['eval'] = implode(',', $evalCodes);
             $configuration['required'] = false;
         } else {
-            $evalCodes = GeneralUtility::trimExplode(',', $configuration['eval'] ?? '', true);
+            // If the image is not decorative, we require alternative text
             $evalCodes = array_filter($evalCodes, static function ($value): bool {
                 return $value !== 'null' && $value !== 'required';
             });

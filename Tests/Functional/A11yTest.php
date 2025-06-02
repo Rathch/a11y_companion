@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Cru\A11yCompanion\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 #[CoversClass(A11yTest::class)]

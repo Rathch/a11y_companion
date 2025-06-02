@@ -30,30 +30,28 @@
             </tr>
          </thead>
          <tbody>
-            <f:for each="{links}" as="linkItems">
-               <f:for each="{linkItems}" as="link">
-                  <tr>
-                     <td>{link.uid}</td>
-                     <td>{link.title}</td>
-                     <td>{link.pid}</td>
-                     <td><a href="{link.href}">{link.href}</a></td>
-                     <td>{link.content}</td>
-                     <td>
-                        <be:link.editRecord class="btn btn-default btn-borderless" table="tt_content" uid="{link.uid}">
-                           <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
-                              data-identifier="actions-page-open" aria-hidden="true">
-                              <span class="icon-markup">
-                                 <svg class="icon-color">
-                                    <use
-                                       xlink:href="/_assets/1ee1d3e909b58d32e30dcea666dd3224/Icons/T3Icons/sprites/actions.svg#actions-file-edit">
-                                    </use>
-                                 </svg>
-                              </span>
+            <f:for each="{links}" as="link">
+               <tr>
+                  <td>{link.uid}</td>
+                  <td>{link.title}</td>
+                  <td>{link.pid}</td>
+                  <td><a href="{link.href}">{link.href}</a></td>
+                  <td>{link.content}</td>
+                  <td>
+                     <be:link.editRecord class="btn btn-default btn-borderless" table="tt_content" uid="{link.uid}">
+                        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-page-open"
+                           data-identifier="actions-page-open" aria-hidden="true">
+                           <span class="icon-markup">
+                              <svg class="icon-color">
+                                 <use
+                                    xlink:href="/_assets/1ee1d3e909b58d32e30dcea666dd3224/Icons/T3Icons/sprites/actions.svg#actions-file-edit">
+                                 </use>
+                              </svg>
                            </span>
-                        </be:link.editRecord>
-                     </td>
-                  </tr>
-               </f:for>
+                        </span>
+                     </be:link.editRecord>
+                  </td>
+               </tr>
             </f:for>
          </tbody>
       </table>

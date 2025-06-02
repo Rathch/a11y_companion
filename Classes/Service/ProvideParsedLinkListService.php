@@ -32,7 +32,7 @@ final readonly class ProvideParsedLinkListService
         $cacheFile = Environment::getVarPath() . '/cache/data/LinksWithoutPurpose.json';
 
         if (
-             file_exists($cacheFile)
+            file_exists($cacheFile)
             && filemtime($cacheFile) > time() - 600
         ) {
             $externalLinks = json_decode(file_get_contents($cacheFile), true);
@@ -83,29 +83,48 @@ final readonly class ProvideParsedLinkListService
         $externalLinks = [];
         foreach ($records as $record) {
             $page = $this->fetchPage($record['pid']);
-            $dom = new \DOMDocument();
-            @$dom->loadHTML($record['bodytext'], LIBXML_NOERROR);
-            $anchors = $dom->getElementsByTagName('a');
-            $index = 0;
-            foreach ($anchors as $anchor) {
-                $linkText = trim($anchor->textContent);
-                $href = trim($anchor->getAttribute('href'));
-                foreach ($blacklistWords as $blackWord) {
-                    if (stripos($linkText, $blackWord) !== false) {
-                        $externalLinks[$record['uid']][$index] = [
-                            'href' => $href,
-                            'content' => $linkText,
-                            'uid' => $record['uid'],
-                            'pid' => $record['pid'],
-                            'title' => $page['title'],
-                        ];
-                        $index++;
-                        break; // Nur einmal pro Link eintragen
-                    }
+            $externalLinksForRecord = $this->extractBlacklistedLinks($record, $blacklistWords, $page);
+            if (!isset($externalLinksForRecord) || $externalLinksForRecord === [] || $externalLinksForRecord === null) {
+                continue;
+            }
+            $externalLinks[$record['uid']] = $externalLinksForRecord;
+        }
+        return $externalLinks;
+    }
+
+    /**
+     * Extrahiert alle Links mit Blacklist-Wörtern aus einem Record
+     *
+     * @param array $record
+     * @param array $blacklistWords
+     * @param array $page
+     * @return array
+     */
+    private function extractBlacklistedLinks(array $record, array $blacklistWords, array $page): array
+    {
+        $links = [];
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($record['bodytext'], LIBXML_NOERROR);
+        $anchors = $dom->getElementsByTagName('a');
+        $index = 0;
+        foreach ($anchors as $anchor) {
+            $linkText = trim($anchor->textContent);
+            $href = trim($anchor->getAttribute('href'));
+            foreach ($blacklistWords as $blackWord) {
+                if (stripos($linkText, $blackWord) !== false) {
+                    $links[$index] = [
+                        'href' => $href,
+                        'content' => $linkText,
+                        'uid' => $record['uid'],
+                        'pid' => $record['pid'],
+                        'title' => $page['title'],
+                    ];
+                    ++$index;
+                    break; // Nur einmal pro Link eintragen
                 }
             }
         }
-        return $externalLinks;
+        return $links;
     }
 
     /**
@@ -124,7 +143,7 @@ final readonly class ProvideParsedLinkListService
                 $queryBuilder->expr()->eq('uid', $pid)
             )
             ->executeQuery()
-            ->fetchAssociative() ?: ['uid' => $pid, 'title' => ''];
+            ->fetchAssociative() ?? ['uid' => $pid, 'title' => ''];
     }
 
     private function fetchRecordsWithLinks(): array
