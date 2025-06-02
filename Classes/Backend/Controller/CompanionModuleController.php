@@ -124,7 +124,7 @@ class CompanionModuleController extends ActionController
         $totalPages = (int)ceil($totalLinks / $itemsPerPage);
         $offset = ($currentPage - 1) * $itemsPerPage;
         $linksForPage = array_slice($allLinks, $offset, $itemsPerPage);
-       
+
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
         $this->setUpMenu($request, $moduleTemplate);
         $moduleTemplate->setTitle('Missing Link Purpose');
