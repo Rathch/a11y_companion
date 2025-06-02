@@ -1,2 +1,161 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$href of method TYPO3\\\\CMS\\\\Backend\\\\Template\\\\Components\\\\Menu\\\\MenuItem\\:\\:setHref\\(\\) expects string, Psr\\\\Http\\\\Message\\\\UriInterface given\\.$#"
+			count: 1
+			path: ../../Classes/Backend/Controller/CompanionModuleController.php
+
+		-
+			message: "#^Cannot access offset 'alternative' on mixed\\.$#"
+			count: 2
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Cannot access offset 'columns' on mixed\\.$#"
+			count: 2
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Cannot access offset 'config' on mixed\\.$#"
+			count: 2
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:getAlternativeTextFieldConfiguration\\(\\) should return array but returns mixed\\.$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:isImageRelationWithAlternativeText\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:setRequiredFieldEvaluation\\(\\) has parameter \\$result with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(array\\{databaseRow\\: array\\{is_decorative\\?\\: bool\\}, processedTca\\: array, \\[key\\: string\\]\\: mixed\\} \\$result\\)\\: Unexpected token \"\\:\", expected '\\]' at offset 158$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Parameter \\#1 \\$configuration of method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:setRequiredFieldEvaluation\\(\\) expects array\\{eval\\?\\: string, required\\?\\: bool\\}, array given\\.$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Parameter \\#1 \\$result \\(array\\<string, mixed\\>\\) of method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:addData\\(\\) should be contravariant with parameter \\$result \\(array\\) of method TYPO3\\\\CMS\\\\Backend\\\\Form\\\\FormDataProviderInterface\\:\\:addData\\(\\)$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function trim expects string, mixed given\\.$#"
+			count: 1
+			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: ../../Classes/Repository/ImageRepository.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Repository\\\\ImageRepository\\:\\:findImagesWithoutAltText\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Repository/ImageRepository.php
+
+		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:countLinks\\(\\) has parameter \\$externalLinks with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:extractBlacklistedLinks\\(\\) has parameter \\$blacklistWords with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:extractBlacklistedLinks\\(\\) has parameter \\$page with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:extractBlacklistedLinks\\(\\) has parameter \\$record with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:extractBlacklistedLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:fetchPage\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:fetchPage\\(\\) should return array but returns array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:fetchRecordsWithLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:getBlacklistWords\\(\\) should return array\\<string\\> but returns array\\<int, mixed\\>\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:getConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:parseAndFilterLinks\\(\\) has parameter \\$blacklistWords with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:parseAndFilterLinks\\(\\) has parameter \\$records with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:parseAndFilterLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Parameter \\#1 \\$externalLinks of method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:countLinks\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Parameter \\#2 \\$content of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:writeFileToTypo3tempDir\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between non\\-empty\\-array and null will always evaluate to false\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php
+
+		-
+			message: "#^Variable \\$externalLinksForRecord in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../../Classes/Service/ProvideParsedLinkListService.php

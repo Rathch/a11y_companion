@@ -1,6 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: "#^Out of 44 possible param types, only 42 \\- 95\\.4 %% actually have it\\. Add more param types to get over 99 %%$#"
-			count: 2
-			path: Classes/Backend/FormDataProvider/RequireAlternativeText.php

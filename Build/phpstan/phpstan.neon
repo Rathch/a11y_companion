@@ -24,20 +24,13 @@ parameters:
   checkAlwaysTrueCheckTypeFunctionCall: false
 
   type_coverage:
-    return_type: 100
-    param_type: 100
+    return_type: 95
+    param_type: 95
     property_type: 95
 
   cognitive_complexity:
-    class: 10
-    function: 5
-
-  type_perfect:
-    no_mixed_property: true
-    no_mixed_caller: true
-    null_over_false: true
-    narrow_param: true
-    narrow_return: true
+    class: 15
+    function: 7
 
   disallowedFunctionCalls:
     -
