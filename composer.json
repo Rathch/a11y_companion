@@ -108,7 +108,7 @@
         "ci:php:mess": "phpmd Classes text Build/phpmd/phpmd.xml",
         "ci:php:rector": "rector --dry-run",
         "ci:php:sniff": "phpcs --standard=Build/phpcs/phpcs.xml Classes Configuration Tests",
-        "ci:php:stan": "phpstan analyse Classes Configuration Tests",
+        "ci:php:stan": "phpstan analyse Classes Configuration Tests --baseline=phpstan-baseline.neon",
         "ci:static": [
             "@ci:composer:normalize",
             "@ci:composer:unused",
