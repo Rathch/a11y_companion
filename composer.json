@@ -86,7 +86,7 @@
         "ci:coverage:functional": [
             "@ci:tests:create-directories",
             "@coverage:create-directories",
-            "phpunit -c Build/phpunit/FunctionalTests.xml --whitelist Classes --coverage-php=build/coverage/functional.cov Tests/Functional"
+            "XDEBUG_MODE=coverage phpunit -c Build/phpunit/FunctionalTests.xml Classes --coverage-php=build/coverage/functional.cov Tests/Functional"
         ],
         "ci:coverage:merge": [
             "@coverage:create-directories",
@@ -94,7 +94,7 @@
         ],
         "ci:coverage:unit": [
             "@coverage:create-directories",
-            "phpunit -c Build/phpunit/UnitTests.xml --whitelist Classes --coverage-php=build/coverage/unit.cov Tests/Unit"
+            "XDEBUG_MODE=coverage phpunit -c Build/phpunit/UnitTests.xml Classes --coverage-php=build/coverage/unit.cov Tests/Unit"
         ],
         "ci:json:lint": "find . ! -path '*/.cache/*' ! -path '*/.Build/*' ! -path '*/node_modules/*' -name '*.json' | xargs -r php .Build/bin/jsonlint -q",
         "ci:php": [
