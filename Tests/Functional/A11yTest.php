@@ -6,6 +6,7 @@ namespace Cru\A11yCompanion\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 #[CoversClass(A11yTest::class)]
 final class A11yTest extends FunctionalTestCase
@@ -28,7 +29,7 @@ final class A11yTest extends FunctionalTestCase
         return $dom;
     }
 
-    #[Test]
+
     public function testExample(): void
     {
         self::assertTrue(true);
