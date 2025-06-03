@@ -27,4 +27,10 @@ final class A11yTest extends FunctionalTestCase
         $dom->loadHTMLFile($path);
         return $dom;
     }
+
+    #[Test]
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
