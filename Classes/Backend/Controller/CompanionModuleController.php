@@ -155,7 +155,7 @@ class CompanionModuleController extends ActionController
         ServerRequestInterface $request,
         int $itemsPerPage,
         array $items,
-        $routeName = 'tx_a11y_companion_list_link'
+        string $routeName = 'tx_a11y_companion_list_link'
     ): array {
         if (isset($request->getQueryParams()['currentPage'])) {
             $currentPage = (int)$request->getQueryParams()['currentPage'];
@@ -177,16 +177,9 @@ class CompanionModuleController extends ActionController
         $firstPage = $pagination->getFirstPageNumber();
         $lastPage = $pagination->getLastPageNumber();
         $pageCount = $paginator->getNumberOfPages();
-        $window = 5;
-        $startPage = max(1, $currentPage - $window);
-        $endPage = min($pageCount, $currentPage + $window);
-        $pageLinks = [];
-        for ($i = $startPage; $i <= $endPage; $i++) {
-            $pageLinks[$i] = (string)$uriBuilder->buildUriFromRoute(
-                $routeName,
-                ['currentPage' => $i]
-            );
-        }
+
+        $pageLinks = $this->buildPageLinks($currentPage, $pageCount, 10, $uriBuilder, $routeName);
+
         $prevPage = $currentPage > 1 ? $currentPage - 1 : null;
         $nextPage = $currentPage < $pageCount ? $currentPage + 1 : null;
         $prevLink = $prevPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $prevPage]) : null;
@@ -207,5 +200,48 @@ class CompanionModuleController extends ActionController
             'firstLink' => $firstLink,
             'lastLink' => $lastLink,
         ];
+    }
+
+    /**
+     * Build an array of page links for the sliding window pagination.
+     *
+     * @param int $currentPage
+     * @param int $pageCount
+     * @param int $windowSize
+     * @param UriBuilder $uriBuilder
+     * @param string $routeName
+     * @return array
+     */
+    private function buildPageLinks(int $currentPage, int $pageCount, int $windowSize, $uriBuilder, string $routeName): array
+    {
+        $halfWindow = (int)floor($windowSize / 2);
+        if ($pageCount <= $windowSize) {
+            $startPage = 1;
+            $endPage = $pageCount;
+        } else {
+            if ($currentPage <= $halfWindow) {
+                $startPage = 1;
+                $endPage = $windowSize;
+            } elseif ($currentPage + $halfWindow > $pageCount) {
+                $startPage = $pageCount - $windowSize + 1;
+                $endPage = $pageCount;
+            } else {
+                $startPage = $currentPage - $halfWindow;
+                $endPage = $currentPage + $halfWindow;
+                if ($windowSize % 2 === 0) {
+                    $endPage -= 1;
+                }
+            }
+        }
+        $startPage = max(1, $startPage);
+        $endPage = min($pageCount, $endPage);
+        $pageLinks = [];
+        for ($i = $startPage; $i <= $endPage; $i++) {
+            $pageLinks[$i] = (string)$uriBuilder->buildUriFromRoute(
+                $routeName,
+                ['currentPage' => $i]
+            );
+        }
+        return $pageLinks;
     }
 }
