@@ -13,6 +13,8 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Pagination\ArrayPaginator;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
 
 class CompanionModuleController extends ActionController
 {
@@ -88,13 +90,12 @@ class CompanionModuleController extends ActionController
         return $moduleTemplate->renderResponse('Index');
     }
 
-    public function listImagesWithoutAltTextAction(\TYPO3\CMS\Core\Http\ServerRequest $request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
+    public function listImagesWithoutAltTextAction(\TYPO3\CMS\Core\Http\ServerRequest $request, int $itemsPerPage = 10): ResponseInterface
     {
-        $offset = ($currentPage - 1) * $itemsPerPage;
-        $images = $this->imageRepository->findImagesWithoutAltText($offset, $itemsPerPage);
-        $totalImages = $this->imageRepository->countImagesWithoutAltText();
-        $totalPages = (int)ceil($totalImages / $itemsPerPage);
+        
+        $images = $this->imageRepository->findImagesWithoutAltText();
 
+        $pagginationData = $this->handlePagination($request, $itemsPerPage, $images, 'tx_a11y_companion_list_alt');
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
         $this->setUpMenu($request, $moduleTemplate);
@@ -102,16 +103,23 @@ class CompanionModuleController extends ActionController
         $moduleTemplate->setTitle('Missing Alt Text Images');
 
         $moduleTemplate->assignMultiple([
-            'images' => $images,
-            'currentPage' => $currentPage,
-            'totalPages' => $totalPages,
-            'itemsPerPage' => $itemsPerPage,
+            'pagination' => $pagginationData['pagination'],
+            'paginator' => $pagginationData['paginator'],
+            'pageLinks' => $pagginationData['pageLinks'],
+            'currentPage' => $pagginationData['currentPage'],
+            'firstPage' => $pagginationData['firstPage'],
+            'lastPage' => $pagginationData['lastPage'],
+            'pageCount' => $pagginationData['pageCount'],
+            'prevLink' => $pagginationData['prevLink'],
+            'nextLink' => $pagginationData['nextLink'],
+            'firstLink' => $pagginationData['firstLink'],
+            'lastLink' => $pagginationData['lastLink'],
         ]);
 
         return $moduleTemplate->renderResponse('AltText/List');
     }
 
-    public function listLinksWithoutPurpose(\TYPO3\CMS\Core\Http\ServerRequest $request, int $currentPage = 1, int $itemsPerPage = 10): ResponseInterface
+    public function listLinksWithoutPurpose(\TYPO3\CMS\Core\Http\ServerRequest $request, int $itemsPerPage = 10): ResponseInterface
     {
         $result = $this->provideParsedLinkListService->getConfiguration();
         $allLinks = [];
@@ -120,22 +128,84 @@ class CompanionModuleController extends ActionController
                 $allLinks[] = $link;
             }
         }
-        $totalLinks = $result['count'] ?? 0;
-        $totalPages = (int)ceil($totalLinks / $itemsPerPage);
-        $offset = ($currentPage - 1) * $itemsPerPage;
-        $linksForPage = array_slice($allLinks, $offset, $itemsPerPage);
+        $pagginationData = $this->handlePagination($request, $itemsPerPage, $allLinks);
 
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
         $this->setUpMenu($request, $moduleTemplate);
         $moduleTemplate->setTitle('Missing Link Purpose');
 
         $moduleTemplate->assignMultiple([
-            'links' => $linksForPage,
-            'currentPage' => $currentPage,
-            'totalPages' => $totalPages,
-            'itemsPerPage' => $itemsPerPage,
+            'pagination' => $pagginationData['pagination'],
+            'paginator' => $pagginationData['paginator'],
+            'pageLinks' => $pagginationData['pageLinks'],
+            'currentPage' => $pagginationData['currentPage'],
+            'firstPage' => $pagginationData['firstPage'],
+            'lastPage' => $pagginationData['lastPage'],
+            'pageCount' => $pagginationData['pageCount'],
+            'prevLink' => $pagginationData['prevLink'],
+            'nextLink' => $pagginationData['nextLink'],
+            'firstLink' => $pagginationData['firstLink'],
+            'lastLink' => $pagginationData['lastLink'],
         ]);
 
         return $moduleTemplate->renderResponse('Links/List');
+    }
+
+    private function handlePagination(
+        ServerRequestInterface $request,
+        int $itemsPerPage,
+        array $items,
+        $routeName = 'tx_a11y_companion_list_link'
+    ): array {
+        if (isset($request->getQueryParams()['currentPage'])) {
+            $currentPage = (int)$request->getQueryParams()['currentPage'];
+        } else {
+            $currentPage = 1;
+        }
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
+
+        $paginator = new ArrayPaginator($items, $currentPage, $itemsPerPage);
+        $pagination = new SlidingWindowPagination(
+            $paginator,
+            10 // Number of pages to show in the sliding window
+        );
+
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
+        $firstPage = $pagination->getFirstPageNumber();
+        $lastPage = $pagination->getLastPageNumber();
+        $pageCount = $paginator->getNumberOfPages();
+        $window = 5;
+        $startPage = max(1, $currentPage - $window);
+        $endPage = min($pageCount, $currentPage + $window);
+        $pageLinks = [];
+        for ($i = $startPage; $i <= $endPage; $i++) {
+            $pageLinks[$i] = (string)$uriBuilder->buildUriFromRoute(
+                $routeName,
+                ['currentPage' => $i]
+            );
+        }
+        $prevPage = $currentPage > 1 ? $currentPage - 1 : null;
+        $nextPage = $currentPage < $pageCount ? $currentPage + 1 : null;
+        $prevLink = $prevPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $prevPage]) : null;
+        $nextLink = $nextPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $nextPage]) : null;
+        $firstLink = $firstPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $firstPage]) : null;
+        $lastLink = $lastPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $lastPage]) : null;
+
+        return [
+            'pagination' => $pagination,
+            'paginator' => $paginator,
+            'currentPage' => $currentPage,
+            'firstPage' => $firstPage,
+            'lastPage' => $lastPage,
+            'pageCount' => $pageCount,
+            'pageLinks' => $pageLinks,
+            'prevLink' => $prevLink,
+            'nextLink' => $nextLink,
+            'firstLink' => $firstLink,
+            'lastLink' => $lastLink,
+        ];
     }
 }

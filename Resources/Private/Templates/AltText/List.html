@@ -11,7 +11,7 @@
         <f:translate key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:description.altText" />
         <a href="https://www.w3.org/TR/WCAG20-TECHS/H37.html">https://www.w3.org/TR/WCAG20-TECHS/H37.html</a>
     </p>
-
+    <f:render section="Pagination" arguments="{_all}" />
     <table class="table">
         <thead>
             <tr>
@@ -41,10 +41,10 @@
             </tr>
         </thead>
         <tbody>
-            <f:for each="{images}" as="image">
+            <f:for each="{paginator.paginatedItems}" as="image">
                 <tr>
                     <td>
-                        <f:image src="fileadmin{image.identifier}" alt="{image.alternative}" height="100px" />
+                        <f:image src="{image.uid}" alt="{image.alternative}" height="100px" />
                     </td>
                     <td>{image.name}</td>
                     <td>{image.identifier}</td>
@@ -99,27 +99,40 @@
             </f:for>
         </tbody>
     </table>
+    <f:render section="Pagination" arguments="{_all}" />
+</f:section>
 
-    <div class="pagination">
-        <f:if condition="{currentPage} > 1">
-            <a href="?id={data.uid}&currentPage={currentPage - 1}">
-                <f:translate key="pagination.previousPage" />
-            </a>
+
+
+<f:section name="Pagination">
+    <ul class="pagination">
+        <f:if condition="{prevLink}">
+            <li class="page-item">
+                <a class="page-link" href="{prevLink}">&laquo; Zurück</a>
+            </li>
         </f:if>
-
-        <f:for each="{0: totalPages}" as="page" iteration="iterator">
-            <f:if condition="{iterator.index} + 1 == {currentPage}">
-                <strong>{iterator.index + 1}</strong>
+        <f:if condition="{currentPage} > {firstPage} +5">
+            <li class="page-item"><a href="{firstLink}" class="page-link">{firstPage}</a></li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+        </f:if>
+        <f:for each="{pageLinks}" as="uri" key="page" iteration="iterator">
+            <f:if condition="{page} == {currentPage}">
+                <f:then>
+                    <li class="page-item active"><span class="page-link">{page}</span></li>
+                </f:then>
+                <f:else>
+                    <li class="page-item"><a href="{uri}" class="page-link">{page}</a></li>
+                </f:else>
             </f:if>
-            <f:else>
-                <a href="?id={data.uid}&currentPage={iterator.index + 1}">{iterator.index + 1}</a>
-            </f:else>
         </f:for>
-
-        <f:if condition="{currentPage} < {totalPages}">
-            <a href="?id={data.uid}&currentPage={currentPage + 1}">
-                <f:translate key="pagination.nextPage" />
-            </a>
+        <f:if condition="{currentPage} < {lastPage} -5">
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item"><a href="{lastLink}" class="page-link">{lastPage}</a></li>
         </f:if>
-    </div>
+        <f:if condition="{nextLink}">
+            <li class="page-item">
+                <a class="page-link" href="{nextLink}">Weiter &raquo;</a>
+            </li>
+        </f:if>
+    </ul>
 </f:section>

@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ImageRepository
 {
-    public function findImagesWithoutAltText(int $offset = 0, int $limit = 10): array
+    public function findImagesWithoutAltText(): array
     {
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_metadata');
@@ -41,8 +41,6 @@ class ImageRepository
         ->andWhere(
             'NOT EXISTS (' . $subQuery->getSQL() . ')'
         )
-        ->setFirstResult($offset)
-        ->setMaxResults($limit)
         ->executeQuery()
         ->fetchAllAssociative();
 
