@@ -108,7 +108,10 @@
     <ul class="pagination">
         <f:if condition="{prevLink}">
             <li class="page-item">
-                <a class="page-link" href="{prevLink}">&laquo; Zurück</a>
+                <a class="page-link" href="{prevLink}">
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:pagination.prev" />
+                </a>
             </li>
         </f:if>
         <f:if condition="{currentPage} > {firstPage} +5">
@@ -131,7 +134,10 @@
         </f:if>
         <f:if condition="{nextLink}">
             <li class="page-item">
-                <a class="page-link" href="{nextLink}">Weiter &raquo;</a>
+                <a class="page-link" href="{nextLink}">
+                    <f:translate
+                        key="LLL:EXT:a11y_companion/Resources/Private/Language/locallang_mod.xlf:pagination.next" />
+                </a>
             </li>
         </f:if>
     </ul>
