@@ -135,12 +135,16 @@
                 <target>Beide Funktionen sind wichtig, um die Zugänglichkeit der Website für Menschen mit Behinderungen zu gewährleisten und die Einhaltung gesetzlicher Vorgaben sicherzustellen.</target>
             </trans-unit>
             <trans-unit id="pagination.prev">
-                <source>&laquo; Back</source>
-                <target>&laquo; Zurück</target>
+                <source><![CDATA[<<]]> Back</source>
+                <target><![CDATA[<<]]> Zurück</target>
             </trans-unit>
             <trans-unit id="pagination.next">
-                <source>Next &raquo;</source>
-                <target>Weiter &raquo;</target>
+                <source>Next <![CDATA[>>]]></source>
+                <target>Weiter <![CDATA[>>]]></target>
+            </trans-unit>
+            <trans-unit id="noLinksFound">
+                <source>Congratulation no links with blacklisted words found</source>
+                <target>Gratulation keine links mit Wörtern aus der blacklist gefunden</target>
             </trans-unit>
         </body>
     </file>

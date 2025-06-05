@@ -100,6 +100,7 @@ final readonly class ProvideParsedLinkListService
             }
             $externalLinks[$record['uid']] = $externalLinksForRecord;
         }
+        debug($externalLinks);
         return $externalLinks;
     }
 
@@ -147,14 +148,22 @@ final readonly class ProvideParsedLinkListService
     private function fetchPage(int $pid): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
-        return $queryBuilder
-            ->select('uid', 'title')
-            ->from('pages')
-            ->where(
-                $queryBuilder->expr()->eq('uid', $pid)
-            )
-            ->executeQuery()
-            ->fetchAssociative() ?? ['uid' => $pid, 'title' => ''];
+        $result = $queryBuilder
+        ->select('uid', 'title')
+        ->from('pages')
+        ->where(
+            $queryBuilder->expr()->eq('uid', $pid)     
+        )
+        ->andWhere(
+            $queryBuilder->expr()->in('doktype', [1,3]),
+        )
+        ->executeQuery()
+        ->fetchAssociative();
+        
+        if ($result === false) {
+            return ['uid' => $pid, 'title' => ''];
+        }
+        return $result;
     }
 
     private function fetchRecordsWithLinks(): array

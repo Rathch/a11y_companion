@@ -136,10 +136,13 @@
                 <target xml:lang="de">Beide Funktionen sind wichtig, um die Zugänglichkeit der Website für Menschen mit Behinderungen zu gewährleisten und die Einhaltung gesetzlicher Vorgaben sicherzustellen.</target>
             </trans-unit>
             <trans-unit id="pagination.prev">
-                <source>&laquo; Back</source>
+                <source><![CDATA[<<]]> Back</source>
             </trans-unit>
             <trans-unit id="pagination.next">
-                <source>Next &raquo;</source>
+                <source>Next <![CDATA[>>]]></source>
+            </trans-unit>
+            <trans-unit id="noLinksFound">
+                <source>Congratulation no links with blacklisted words found</source>
             </trans-unit>
         </body>
     </file>
