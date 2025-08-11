@@ -1,4 +1,5 @@
 <?php
+
 // SPDX-FileCopyrightText: 2025 Christian Rath-Ulrich
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -152,14 +153,14 @@ final readonly class ProvideParsedLinkListService
         ->select('uid', 'title')
         ->from('pages')
         ->where(
-            $queryBuilder->expr()->eq('uid', $pid)     
+            $queryBuilder->expr()->eq('uid', $pid)
         )
         ->andWhere(
-            $queryBuilder->expr()->in('doktype', [1,3]),
+            $queryBuilder->expr()->in('doktype', [1, 3]),
         )
         ->executeQuery()
         ->fetchAssociative();
-        
+
         if ($result === false) {
             return ['uid' => $pid, 'title' => ''];
         }

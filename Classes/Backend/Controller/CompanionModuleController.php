@@ -1,4 +1,5 @@
 <?php
+
 // SPDX-FileCopyrightText: 2025 Christian Rath-Ulrich
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -26,10 +27,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CompanionModuleController extends ActionController
 {
@@ -107,7 +108,7 @@ class CompanionModuleController extends ActionController
 
     public function listImagesWithoutAltTextAction(\TYPO3\CMS\Core\Http\ServerRequest $request, int $itemsPerPage = 10): ResponseInterface
     {
-        
+
         $images = $this->imageRepository->findImagesWithoutAltText();
 
         $pagginationData = $this->handlePagination($request, $itemsPerPage, $images, 'tx_a11y_companion_list_alt');

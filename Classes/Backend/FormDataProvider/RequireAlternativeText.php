@@ -1,4 +1,5 @@
 <?php
+
 // SPDX-FileCopyrightText: 2025 Christian Rath-Ulrich
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
