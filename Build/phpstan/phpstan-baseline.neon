@@ -1,22 +1,32 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Class cognitive complexity is 23, keep it under 15$#"
-			count: 1
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Cognitive complexity for \"Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:buildPageLinks\\(\\)\" is 10, keep it under 7$#"
-			count: 1
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Cognitive complexity for \"Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:handlePagination\\(\\)\" is 9, keep it under 7$#"
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:buildNavigationLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: ../../Classes/Backend/Controller/CompanionModuleController.php
 
 		-
 			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:buildPageLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/Controller/CompanionModuleController.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:buildPaginationData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/Controller/CompanionModuleController.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:calculatePageRange\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/Controller/CompanionModuleController.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:generatePageLinks\\(\\) has parameter \\$pageRange with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/Backend/Controller/CompanionModuleController.php
+
+		-
+			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:generatePageLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: ../../Classes/Backend/Controller/CompanionModuleController.php
 
@@ -27,26 +37,6 @@ parameters:
 
 		-
 			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\Controller\\\\CompanionModuleController\\:\\:handlePagination\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Only booleans are allowed in a ternary operator condition, int given\\.$#"
-			count: 2
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Only booleans are allowed in a ternary operator condition, int\\<1, max\\>\\|null given\\.$#"
-			count: 1
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Only booleans are allowed in a ternary operator condition, int\\<2, max\\>\\|null given\\.$#"
-			count: 1
-			path: ../../Classes/Backend/Controller/CompanionModuleController.php
-
-		-
-			message: "#^Out of 49 possible param types, only 46 \\- 93\\.8 %% actually have it\\. Add more param types to get over 95 %%$#"
 			count: 1
 			path: ../../Classes/Backend/Controller/CompanionModuleController.php
 
@@ -83,11 +73,6 @@ parameters:
 		-
 			message: "#^Method Cru\\\\A11yCompanion\\\\Backend\\\\FormDataProvider\\\\RequireAlternativeText\\:\\:setRequiredFieldEvaluation\\(\\) has parameter \\$result with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
-
-		-
-			message: "#^Out of 49 possible param types, only 46 \\- 93\\.8 %% actually have it\\. Add more param types to get over 95 %%$#"
-			count: 2
 			path: ../../Classes/Backend/FormDataProvider/RequireAlternativeText.php
 
 		-
