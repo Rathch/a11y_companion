@@ -173,49 +173,86 @@ class CompanionModuleController extends ActionController
         array $items,
         string $routeName = 'tx_a11y_companion_list_link'
     ): array {
-        if (isset($request->getQueryParams()['currentPage'])) {
-            $currentPage = (int)$request->getQueryParams()['currentPage'];
-        } else {
-            $currentPage = 1;
-        }
-        if ($currentPage < 1) {
-            $currentPage = 1;
-        }
+        $currentPage = $this->getValidatedCurrentPage($request);
 
         $paginator = new ArrayPaginator($items, $currentPage, $itemsPerPage);
-        $pagination = new SlidingWindowPagination(
-            $paginator,
-            10 // Number of pages to show in the sliding window
-        );
+        $pagination = new SlidingWindowPagination($paginator, 10);
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        $firstPage = $pagination->getFirstPageNumber();
-        $lastPage = $pagination->getLastPageNumber();
-        $pageCount = $paginator->getNumberOfPages();
+        $paginationData = $this->buildPaginationData($currentPage, $paginator, $pagination, $uriBuilder, $routeName);
 
-        $pageLinks = $this->buildPageLinks($currentPage, $pageCount, 10, $uriBuilder, $routeName);
-
-        $prevPage = $currentPage > 1 ? $currentPage - 1 : null;
-        $nextPage = $currentPage < $pageCount ? $currentPage + 1 : null;
-        $prevLink = $prevPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $prevPage]) : null;
-        $nextLink = $nextPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $nextPage]) : null;
-        $firstLink = $firstPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $firstPage]) : null;
-        $lastLink = $lastPage ? (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $lastPage]) : null;
-
-        return [
+        return array_merge($paginationData, [
             'pagination' => $pagination,
             'paginator' => $paginator,
+        ]);
+    }
+
+    private function getValidatedCurrentPage(ServerRequestInterface $request): int
+    {
+        $currentPage = $request->getQueryParams()['currentPage'] ?? 1;
+        return max(1, (int)$currentPage);
+    }
+
+    private function buildPaginationData(
+        int $currentPage,
+        ArrayPaginator $paginator,
+        SlidingWindowPagination $pagination,
+        UriBuilder $uriBuilder,
+        string $routeName
+    ): array {
+        $pageCount = $paginator->getNumberOfPages();
+        $firstPage = $pagination->getFirstPageNumber();
+        $lastPage = $pagination->getLastPageNumber();
+
+        $navigationLinks = $this->buildNavigationLinks($currentPage, $pageCount, $firstPage, $lastPage, $uriBuilder, $routeName);
+
+        return [
             'currentPage' => $currentPage,
             'firstPage' => $firstPage,
             'lastPage' => $lastPage,
             'pageCount' => $pageCount,
-            'pageLinks' => $pageLinks,
-            'prevLink' => $prevLink,
-            'nextLink' => $nextLink,
-            'firstLink' => $firstLink,
-            'lastLink' => $lastLink,
+            'pageLinks' => $this->buildPageLinks($currentPage, $pageCount, 10, $uriBuilder, $routeName),
+            ...$navigationLinks,
         ];
+    }
+
+    private function buildNavigationLinks(
+        int $currentPage,
+        int $pageCount,
+        int $firstPage,
+        int $lastPage,
+        UriBuilder $uriBuilder,
+        string $routeName
+    ): array {
+        $prevPage = $this->getPreviousPage($currentPage);
+        $nextPage = $this->getNextPage($currentPage, $pageCount);
+
+        return [
+            'prevLink' => $this->buildPageLink($prevPage, $uriBuilder, $routeName),
+            'nextLink' => $this->buildPageLink($nextPage, $uriBuilder, $routeName),
+            'firstLink' => $this->buildPageLink($firstPage, $uriBuilder, $routeName),
+            'lastLink' => $this->buildPageLink($lastPage, $uriBuilder, $routeName),
+        ];
+    }
+
+    private function getPreviousPage(int $currentPage): ?int
+    {
+        return $currentPage > 1 ? $currentPage - 1 : null;
+    }
+
+    private function getNextPage(int $currentPage, int $pageCount): ?int
+    {
+        return $currentPage < $pageCount ? $currentPage + 1 : null;
+    }
+
+    private function buildPageLink(?int $pageNumber, UriBuilder $uriBuilder, string $routeName): ?string
+    {
+        if ($pageNumber === null) {
+            return null;
+        }
+
+        return (string)$uriBuilder->buildUriFromRoute($routeName, ['currentPage' => $pageNumber]);
     }
 
     /**
@@ -230,27 +267,42 @@ class CompanionModuleController extends ActionController
      */
     private function buildPageLinks(int $currentPage, int $pageCount, int $windowSize, $uriBuilder, string $routeName): array
     {
+        $pageRange = $this->calculatePageRange($currentPage, $pageCount, $windowSize);
+
+        return $this->generatePageLinks($pageRange, $uriBuilder, $routeName);
+    }
+
+    private function calculatePageRange(int $currentPage, int $pageCount, int $windowSize): array
+    {
         $halfWindow = (int)floor($windowSize / 2);
+
         if ($pageCount <= $windowSize) {
-            $startPage = 1;
-            $endPage = $pageCount;
-        } else {
-            if ($currentPage <= $halfWindow) {
-                $startPage = 1;
-                $endPage = $windowSize;
-            } elseif ($currentPage + $halfWindow > $pageCount) {
-                $startPage = $pageCount - $windowSize + 1;
-                $endPage = $pageCount;
-            } else {
-                $startPage = $currentPage - $halfWindow;
-                $endPage = $currentPage + $halfWindow;
-                if ($windowSize % 2 === 0) {
-                    $endPage -= 1;
-                }
-            }
+            return ['start' => 1, 'end' => $pageCount];
         }
-        $startPage = max(1, $startPage);
-        $endPage = min($pageCount, $endPage);
+
+        if ($currentPage <= $halfWindow) {
+            return ['start' => 1, 'end' => $windowSize];
+        }
+
+        if ($currentPage + $halfWindow > $pageCount) {
+            return ['start' => $pageCount - $windowSize + 1, 'end' => $pageCount];
+        }
+
+        $startPage = $currentPage - $halfWindow;
+        $endPage = $currentPage + $halfWindow;
+
+        if ($windowSize % 2 === 0) {
+            $endPage -= 1;
+        }
+
+        return ['start' => $startPage, 'end' => $endPage];
+    }
+
+    private function generatePageLinks(array $pageRange, UriBuilder $uriBuilder, string $routeName): array
+    {
+        $startPage = max(1, $pageRange['start']);
+        $endPage = $pageRange['end'];
+
         $pageLinks = [];
         for ($i = $startPage; $i <= $endPage; $i++) {
             $pageLinks[$i] = (string)$uriBuilder->buildUriFromRoute(
@@ -258,6 +310,7 @@ class CompanionModuleController extends ActionController
                 ['currentPage' => $i]
             );
         }
+
         return $pageLinks;
     }
 }

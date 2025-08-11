@@ -101,7 +101,6 @@ final readonly class ProvideParsedLinkListService
             }
             $externalLinks[$record['uid']] = $externalLinksForRecord;
         }
-        debug($externalLinks);
         return $externalLinks;
     }
 

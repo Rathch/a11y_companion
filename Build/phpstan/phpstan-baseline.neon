@@ -121,11 +121,6 @@ parameters:
 			path: ../../Classes/Repository/ImageRepository.php
 
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: ../../Classes/Service/ProvideParsedLinkListService.php
-
-		-
 			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:countLinks\\(\\) has parameter \\$externalLinks with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: ../../Classes/Service/ProvideParsedLinkListService.php
@@ -152,11 +147,6 @@ parameters:
 
 		-
 			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:fetchPage\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: ../../Classes/Service/ProvideParsedLinkListService.php
-
-		-
-			message: "#^Method Cru\\\\A11yCompanion\\\\Service\\\\ProvideParsedLinkListService\\:\\:fetchPage\\(\\) should return array but returns array\\<string, mixed\\>\\|false\\.$#"
 			count: 1
 			path: ../../Classes/Service/ProvideParsedLinkListService.php
 

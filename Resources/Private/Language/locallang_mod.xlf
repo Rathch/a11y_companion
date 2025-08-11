@@ -1,148 +1,150 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-
     <file source-language="en" datatype="plaintext" original="messages" date="2025-04-16T12:00:00Z">
         <body>
-            <trans-unit id="module.title">
+            <trans-unit id="module.title" xml:space="preserve">
                 <source>a11y Companion</source>
-                <target xml:lang="de">a11y Begleiter</target>
+                <target>a11y Begleiter</target>
             </trans-unit>
-            <trans-unit id="mlang_labels_tablabel">
+            <trans-unit id="mlang_labels_tablabel" xml:space="preserve">
                 <source>a11y Companion</source>
-                <target xml:lang="de">a11y Begleiter</target>
+                <target>a11y Begleiter</target>
             </trans-unit>
-            <trans-unit id="mlang_tabs_tab">
+            <trans-unit id="mlang_tabs_tab" xml:space="preserve">
                 <source>a11y Companion</source>
-                <target xml:lang="de">a11y Begleiter</target>
+                <target>a11y Begleiter</target>
             </trans-unit>
-            <trans-unit id="header.altText">
+            <trans-unit id="header.altText" xml:space="preserve">
                 <source>alt tags Overview</source>
-                <target xml:lang="de">Alt-Tag Übersicht</target>
+                <target>Alt-Tag Übersicht</target>
             </trans-unit>
-            <trans-unit id="description.altText">
+            <trans-unit id="description.altText" xml:space="preserve">
                 <source>here are all pictures listed that have no alt tag. pictures can be marked as decorative. see also:</source>
-                <target xml:lang="de">Hier sind alle Bilder aufgelistet, die keinen Alt-Tag besitzen. Bilder können als dekorativ markiert werden. Siehe auch:</target>
+                <target>Hier sind alle Bilder aufgelistet, die keinen Alt-Tag besitzen. Bilder können als dekorativ markiert werden. Siehe auch:</target>
             </trans-unit>
-            <trans-unit id="table.previewImage">
+            <trans-unit id="table.previewImage" xml:space="preserve">
                 <source>Preview Image</source>
-                <target xml:lang="de">Vorschaubild</target>
+                <target>Vorschaubild</target>
             </trans-unit>
-            <trans-unit id="table.fileName">
+            <trans-unit id="table.fileName" xml:space="preserve">
                 <source>Filename</source>
-                <target xml:lang="de">Dateiname</target>
+                <target>Dateiname</target>
             </trans-unit>
-            <trans-unit id="table.path">
+            <trans-unit id="table.path" xml:space="preserve">
                 <source>Path</source>
-                <target xml:lang="de">Pfad</target>
+                <target>Pfad</target>
             </trans-unit>
-            <trans-unit id="table.altTextAvailable">
+            <trans-unit id="table.altTextAvailable" xml:space="preserve">
                 <source>Alt tag present</source>
-                <target xml:lang="de">Alt-Tag vorhanden</target>
+                <target>Alt-Tag vorhanden</target>
             </trans-unit>
-            <trans-unit id="table.decorative">
+            <trans-unit id="table.decorative" xml:space="preserve">
                 <source>Decorativ</source>
-                <target xml:lang="de">Dekorativ</target>
+                <target>Dekorativ</target>
             </trans-unit>
-            <trans-unit id="table.actions">
+            <trans-unit id="table.actions" xml:space="preserve">
                 <source>Action</source>
-                <target xml:lang="de">Aktion</target>
+                <target>Aktion</target>
             </trans-unit>
-            <trans-unit id="badge.yes">
+            <trans-unit id="badge.yes" xml:space="preserve">
                 <source>Yes</source>
-                <target xml:lang="de">Ja</target>
+                <target>Ja</target>
             </trans-unit>
-            <trans-unit id="badge.no">
+            <trans-unit id="badge.no" xml:space="preserve">
                 <source>No</source>
-                <target xml:lang="de">Nein</target>
+                <target>Nein</target>
             </trans-unit>
             <trans-unit id="page" xml:space="preserve">
                 <source>Page</source>
-                <target xml:lang="de">Seite</target>
+                <target>Seite</target>
             </trans-unit>
             <trans-unit id="slug" xml:space="preserve">
                 <source>Slug</source>
-                <target xml:lang="de">Slug</target>
+                <target>Slug</target>
             </trans-unit>
             <trans-unit id="visibility" xml:space="preserve">
                 <source>Visibility</source>
-                <target xml:lang="de">Sichtbarkeit</target>
+                <target>Sichtbarkeit</target>
             </trans-unit>
             <trans-unit id="yes" xml:space="preserve">
                 <source>Yes</source>
-                <target xml:lang="de">Ja</target>
+                <target>Ja</target>
             </trans-unit>
             <trans-unit id="no" xml:space="preserve">
                 <source>No</source>
-                <target xml:lang="de">Nein</target>
+                <target>Nein</target>
             </trans-unit>
             <trans-unit id="uid" xml:space="preserve">
                 <source>UID</source>
-                <target xml:lang="de">UID</target>
+                <target>UID</target>
             </trans-unit>
             <trans-unit id="pid" xml:space="preserve">
                 <source>PID</source>
-                <target xml:lang="de">PID</target>
+                <target>PID</target>
             </trans-unit>
             <trans-unit id="deleted" xml:space="preserve">
                 <source>Deleted</source>
-                <target xml:lang="de">Gelöscht</target>
+                <target>Gelöscht</target>
             </trans-unit>
             <trans-unit id="url" xml:space="preserve">
                 <source>URL</source>
-                <target xml:lang="de">URL</target>
+                <target>URL</target>
             </trans-unit>
             <trans-unit id="target" xml:space="preserve">
                 <source>Target</source>
-                <target xml:lang="de">Ziel</target>
+                <target>Ziel</target>
             </trans-unit>
             <trans-unit id="actions" xml:space="preserve">
                 <source>Actions</source>
-                <target xml:lang="de">Aktionen</target>
+                <target>Aktionen</target>
             </trans-unit>
             <trans-unit id="visible" xml:space="preserve">
                 <source>Visible</source>
-                <target xml:lang="de">Sichtbar</target>
+                <target>Sichtbar</target>
             </trans-unit>
             <trans-unit id="hidden" xml:space="preserve">
                 <source>Hidden</source>
-                <target xml:lang="de">Versteckt</target>
+                <target>Versteckt</target>
             </trans-unit>
             <trans-unit id="title" xml:space="preserve">
                 <source>Title</source>
-                <target xml:lang="de">Titel</target>
+                <target>Titel</target>
             </trans-unit>
             <trans-unit id="contend" xml:space="preserve">
-                <source>Contend</source>
-                <target xml:lang="de">Inhalt</target>
+                <source>Content</source>
+                <target>Inhalt</target>
             </trans-unit>
-            <trans-unit id="intro.heading">
+            <trans-unit id="intro.heading" xml:space="preserve">
                 <source>Accessibility Assistant</source>
-                <target xml:lang="de">Barrierefreiheits-Assistent</target>
+                <target>Barrierefreiheits-Assistent</target>
             </trans-unit>
-            <trans-unit id="intro.text">
+            <trans-unit id="intro.text" xml:space="preserve">
                 <source>This backend module helps editors improve the accessibility of the website. It offers two main features:</source>
-                <target xml:lang="de">Dieses Backend-Modul unterstützt Redakteur:innen dabei, die Barrierefreiheit der Website zu verbessern. Es bietet zwei zentrale Funktionen:</target>
+                <target>Dieses Backend-Modul unterstützt Redakteur:innen dabei, die Barrierefreiheit der Website zu verbessern. Es bietet zwei zentrale Funktionen:</target>
             </trans-unit>
-            <trans-unit id="intro.feature1">
-                <source><strong>Images without alt text:</strong> Shows a list of all images missing alternative text. This allows missing alt texts to be quickly identified and added.</source>
-                <target xml:lang="de"><strong>Bilder ohne Alt-Text:</strong> Zeigt eine Liste aller Bilder an, denen ein Alternativtext fehlt. So können fehlende Alt-Texte schnell identifiziert und nachgepflegt werden.</target>
+            <trans-unit id="intro.feature1" xml:space="preserve">
+                <source><g id="bold">Images without alt text:</g> Shows a list of all images missing alternative text. This allows missing alt texts to be quickly identified and added.</source>
+                <target><g id="bold">Bilder ohne Alt-Text:</g> Zeigt eine Liste aller Bilder an, denen ein Alternativtext fehlt. So können fehlende Alt-Texte schnell identifiziert und nachgepflegt werden.</target>
             </trans-unit>
-            <trans-unit id="intro.feature2">
-                <source><strong>Links without purpose:</strong> Lists all links whose purpose is not clearly recognizable. This helps to find and optimize unclear or non-accessible link texts.</source>
-                <target xml:lang="de"><strong>Links ohne Zweck:</strong> Listet alle Links auf, deren Zweck nicht eindeutig erkennbar ist. Dies hilft, unklare oder nicht barrierefreie Linktexte zu finden und zu optimieren.</target>
+            <trans-unit id="intro.feature2" xml:space="preserve">
+                <source><g id="bold">Links without purpose:</g> Lists all links whose purpose is not clearly recognizable. This helps to find and optimize unclear or non-accessible link texts.</source>
+                <target><g id="bold">Links ohne Zweck:</g> Listet alle Links auf, deren Zweck nicht eindeutig erkennbar ist. Dies hilft, unklare oder nicht barrierefreie Linktexte zu finden und zu optimieren.</target>
             </trans-unit>
-            <trans-unit id="intro.why">
+            <trans-unit id="intro.why" xml:space="preserve">
                 <source>Both features are important to ensure accessibility for people with disabilities and to comply with legal requirements.</source>
-                <target xml:lang="de">Beide Funktionen sind wichtig, um die Zugänglichkeit der Website für Menschen mit Behinderungen zu gewährleisten und die Einhaltung gesetzlicher Vorgaben sicherzustellen.</target>
+                <target>Beide Funktionen sind wichtig, um die Zugänglichkeit der Website für Menschen mit Behinderungen zu gewährleisten und die Einhaltung gesetzlicher Vorgaben sicherzustellen.</target>
             </trans-unit>
-            <trans-unit id="pagination.prev">
+            <trans-unit id="pagination.prev" xml:space="preserve">
                 <source><![CDATA[<<]]> Back</source>
+                <target><![CDATA[<<]]> Zurück</target>
             </trans-unit>
-            <trans-unit id="pagination.next">
+            <trans-unit id="pagination.next" xml:space="preserve">
                 <source>Next <![CDATA[>>]]></source>
+                <target>Weiter <![CDATA[>>]]></target>
             </trans-unit>
-            <trans-unit id="noLinksFound">
-                <source>Congratulation no links with blacklisted words found</source>
+            <trans-unit id="noLinksFound" xml:space="preserve">
+                <source>Congratulations! No links with blacklisted words found.</source>
+                <target>Gratulation! Keine Links mit Wörtern aus der Blacklist gefunden.</target>
             </trans-unit>
         </body>
     </file>
