@@ -16,7 +16,7 @@
         "zeroseven/z7-semantilizer": "^4.1"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "2.47.0",
+        "ergebnis/composer-normalize": "2.48.2",
         "friendsofphp/php-cs-fixer": "^3",
         "helmich/typo3-typoscript-lint": "3.3.0",
         "icanhazstring/composer-unused": "0.8.11",
